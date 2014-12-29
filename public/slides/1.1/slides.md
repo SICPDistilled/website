@@ -230,8 +230,86 @@ nil
 ---
 
 ---
-
 # Evaluating Combinations
 * Evaluate the subexpressions of the combination.
 * Apply the procedure that is the value of the leftmost subexpression (the operator) to the arguments that are the values of the other subexpressions (the operands).
 mark
+
+---
+```clojure
+(* (+ 3 (/ 10 2))
+   (- 2 3)
+   (+ (* 2 3) (* 5 2)))
+```
+---
+```clojure
+(def a 3)
+```
+'Special forms' don't follow the evaluation rule
+---
+# So far
+* Primative
+  - Data (numbers, strings, keywords, chars)
+--
+
+  - Procedures (arithmetic)
+
+--
+
+## Combine operations by nesting.
+```clojure
+(+ (* 3 5)
+   (- (/ 4 3) (* 2 9)))
+```
+--
+
+## Associate names with values.
+```clojure
+(def a 3)
+(+ a 2)
+```
+---
+## Compound Procedures
+```clojure
+(def square (fn [x]
+              (* x x)))
+```
+```clojure
+(defn square [x]
+  (* x x))
+```
+
+```scheme
+(define square (lambda (x) (* x x)))
+```
+```scheme
+(define (square x)
+   (* x x)
+```
+---
+
+## The Substitution Model for Procedure Application
+To apply a compound procedure to arguments, evaluate the body of the procedure with each formal parameter replaced by the corresponding argument.
+
+```
+(square 5)
+```
+--
+
+Take the body of the procedure
+```
+(* x x)
+```
+
+--
+
+Replace formal parameter (x) with the value of the arguement (5)
+```
+(* 5 5)
+```
+
+--
+Evaluate
+```
+25
+```
