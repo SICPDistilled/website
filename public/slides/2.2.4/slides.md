@@ -193,7 +193,7 @@ A picture is a function that takes a "frame" as an argument and draws itself ins
 
 What is a frame?
 ================
-<img src="frame-diagram.png" width="500">
+<img src="frame-diagram.png" width="400">
 ```clojure
 {:origin [100 50]
  :e1     [300 100]
