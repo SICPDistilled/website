@@ -40,7 +40,6 @@ get '/' do
 end
 
 get '/slides/:id/' do
-  require_logon!
   @id = params[:id]
   erb :presentation
 end
