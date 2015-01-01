@@ -2,13 +2,12 @@ Creating A Language Of Pictures
 ===============================
 
 ---
-
-How to describe Escher?
-=======================
-
-![Square-Limit](SquareLimit500.jpg)
+class: center,middle
+# How to describe Escher?
+<img src="SquareLimit500.jpg" width="450">
 
 ---
+class: center,middle
 # George
 <img src="1.png" width="400">
 ---
@@ -103,7 +102,7 @@ How to describe Escher?
       (below top
              bottom))))
 ```
-Takes 4 operations and returns a function of a picture that draws them in a square
+Takes 4 operations and returns a function of a picture that draws the picture transformed by them, each in a quarter of the frame
 
 ---
 ```clojure
@@ -323,8 +322,9 @@ Refactor add-vec to take more than to arguments and neaten up frame-painter
 ```
 
 ---
+class: center,middle
 # A different picture type
-<img src="bruce.png" width="500">
+<img src="bruce.png" width="400">
 
 ---
 # Drawing it
