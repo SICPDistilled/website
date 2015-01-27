@@ -7,6 +7,10 @@ require "sinatra/reloader" if development?
 
 use Rack::Session::Cookie
 
+configure do
+  set :haml, :layout => :layout
+end
+
 set :session_secret, ENV['SESSION_SECRET'] || 'sssshhhh'
 
 use OmniAuth::Builder do
