@@ -152,11 +152,11 @@ Returns true if:
     (and <e1> ... <en>)
 --
 
-    > (and 3 (= 1 2) (/ 1 0))
+    > (and (= 1 2) (/ 1 0))
     false
 --
 
-    > (and 3 (= 1 1) (/ 1 0))
+    > (and (= 1 1) (/ 1 0))
     ArithmeticException Divide by zero  clojure.lang.Numbers.divide (Numbers.java:156)
 
 ---
