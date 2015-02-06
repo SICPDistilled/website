@@ -18,6 +18,10 @@ configure do
   set :haml, :layout => :layout
 end
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 set :session_secret, ENV['SESSION_SECRET'] || 'sssshhhh'
 
 use OmniAuth::Builder do

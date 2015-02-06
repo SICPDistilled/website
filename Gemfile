@@ -8,3 +8,4 @@ gem "octokit"
 gem 'puma'
 gem 'haml'
 gem 'redcarpet'
+gem 'newrelic_rpm'
