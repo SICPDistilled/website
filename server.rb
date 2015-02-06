@@ -46,7 +46,7 @@ end
 
 get '/auth/:provider/callback' do
   session[:authenticated] = true
-  session[:user_id] = request.env['omniauth.auth']['info']['name']
+  session[:user_id] = request.env['omniauth.auth']['info']['nickname']
   redirect '/'
 end
 
