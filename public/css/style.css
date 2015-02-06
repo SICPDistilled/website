@@ -482,7 +482,5 @@ body {
 
 .container {
     position: relative;
-    width: 100%;
-    max-width: 90%;
     padding-top: 10px;
 }
