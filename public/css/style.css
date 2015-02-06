@@ -472,7 +472,7 @@ body {
     text-decoration: none;
     display: block;
     padding: 5px 15px;
-    transition: .3s background-color;
+    /* transition: .1s background-color; */
 }
 
 .menu a:hover {
