@@ -37,6 +37,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    redcarpet (3.1.2)
     sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -65,6 +66,7 @@ DEPENDENCIES
   octokit
   omniauth
   omniauth-github
+  redcarpet
   sinatra
   sinatra-contrib
   thin

@@ -7,3 +7,4 @@ gem 'omniauth-github'
 gem "octokit"
 gem 'thin'
 gem 'haml'
+gem 'redcarpet'

@@ -3,13 +3,22 @@ require 'omniauth'
 require 'omniauth-github'
 require 'octokit'
 require 'haml'
+require 'redcarpet'
 require "sinatra/reloader" if development?
 
 use Rack::Session::Cookie
 
+Tilt.register Tilt::RedcarpetTemplate::Redcarpet2, 'markdown', 'mkd', 'md'
+
+set :markdown, :fenced_code_blocks => true,
+               :layout_engine => :haml,
+               :layout => :layout
+
 configure do
   set :haml, :layout => :layout
 end
+
+
 
 set :session_secret, ENV['SESSION_SECRET'] || 'sssshhhh'
 
@@ -41,6 +50,19 @@ end
 get '/' do
   require_logon!
   haml :index
+end
+
+not_found do
+  markdown :not_found
+end
+
+get '/section/:id/' do
+  id = params[:id]
+  if File.exists?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.markdown"))
+    markdown "/section/#{id}".to_sym
+  else
+   markdown :coming_soon
+  end
 end
 
 get '/slides/:id/' do

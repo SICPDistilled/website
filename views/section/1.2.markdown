@@ -1,0 +1,277 @@
+# Procedures and The Processes They Generate
+
+---
+# Factorial
+n! = n.(n-1).(n-2)...3.2.1
+
+n! = n.(n-1)!
+
+
+```
+
+(defn factorial [n]
+  (if (= n 1)
+    1
+    (* n (factorial (dec n)))))
+
+```
+
+---
+
+```clojure
+
+(factorial 5)
+(* 5 (factorial 4))
+(* 5 (* 4 (factorial 3)))
+(* 5 (* 4 (* 3 (factorial 2))))
+(* 5 (* 4 (* 3 (* 2 (factorial 1)))))
+(* 5 (* 4 (* 3 (* 2 1))))
+(* 5 (* 4 (* 3 2)))
+(* 5 (* 4 6))
+(* 5 24)
+120
+```
+
+---
+```clojure
+(defn- fact-iter [product counter n]
+  (if (> counter n)
+    product
+    (recur (* counter product)
+           (inc counter)
+           n)))
+
+(defn factorial [n]
+  (fact-iter 1 1 n))
+```
+    (factorial 5)
+    (fact-iter 1 1 5)
+    (fact-iter 1 2 5)
+    (fact-iter 2 3 5)
+    (fact-iter 6 4 5)
+    (fact-iter 24 5 5)
+    (fact-iter 120 6 5)
+    120
+
+---
+## TIMTOWTDI
+```clojure
+(defn- fact-iter [product counter n]
+  (if (> counter n)
+    product
+    (recur (* counter product)
+           (inc counter)
+           n)))
+
+(defn factorial [n]
+  (fact-iter 1 1 n))
+```
+```clojure
+(defn factorial [n]
+  (letfn [(fact-iter [product counter]
+            (if (> counter n)
+              product
+              (recur (* counter product)
+                     (inc counter))))]
+    (fact-iter 1 1)))
+```
+
+
+```clojure
+(defn factorial
+  ([n] (factorial n 1 1))
+  ([n product counter]
+     (if (> counter n)
+       product
+       (recur n
+              (* counter product)
+              (inc counter)))))
+```
+
+---
+# Exercise (SICP-1.9)
+
+Given
+
+```clojure
+(defn + [a b]
+  (if (= a 0)
+    b
+    (inc (+ (dec a) b))))
+```
+Using the substution model, illustrate the process generated.
+
+Is it iterative or recursive?
+
+---
+# Tree Recursion
+
+Fib(n) = {
+           0
+           1
+           Fib(n-1) + Fib(n-2)
+         }
+
+
+```clojure
+(defn fib [n]
+  (if (or (= n 1)
+          (= n 0))
+    n
+    (+ (fib (dec n))
+       (fib (- n 2)))))
+```
+
+---
+<img src="fibtree.png" width="700">
+
+---
+# Iterative
+```clojure
+(defn- fib-iter [a b count]
+  (if (= count 0)
+    b
+    (recur (+ a b) a (dec count))))
+
+(defn fib [n]
+  (fib-iter 1 0 n))
+```
+
+---
+```clojure
+(def us-coins [50 25 10 5 1])
+
+(defn count-change
+  ([amount]
+     (count-change amount us-coins))
+  ([amount coins]
+     (cond (= amount 0)
+           1
+
+           (or (< amount 0)
+               (empty? coins))
+           0
+
+           :else
+           (+ (count-change amount
+                            (rest coins))
+              (count-change (- amount (first coins))
+                            coins)))))
+```
+
+---
+# 'Big O'
+
+
+---
+# Exponentiation
+```clojure
+(defn expt [b n]
+  (if (= n 0)
+    1
+    (* b (expt b (dec n)))))
+```
+```clojure
+(defn expt [b n]
+  (expt-iterative b n 1))
+
+(defn expt-iterative [b counter product]
+  (if (= counter 0)
+    product
+    (recur b
+           (dec counter)
+           (* b product))))
+```
+
+---
+# Fast exponentiation
+
+    b*b = b^2
+    b^2*b^2 = b^4
+    b^4*b^4 = b^8
+
+```clojure
+(defn fast-expt [b n]
+  (cond (= n 0)
+        1
+
+        (even? n)
+        (square (fast-expt b (/ n 2)))
+
+        :else
+        (* b (fast-expt b (dec n)))))
+```
+
+---
+# Fast, Iterative Exponentiation
+```clojure
+(defn fast-expt-iter
+  ([b n] (fast-expt-iter b n 1))
+  ([b n a]
+     ; COMPLETE (Ex 1.16)
+     ))
+```
+### Hint
+>Using the observation that ( b<sup>n/2</sup> ) <sup>2</sup> = ( b <sup>2</sup> ) <sup>n/2</sup> , keep, along with the exponent n and the base b , an additional state variable a , and define the state transformation in such a way that the product ab<sup>n</sup> is unchanged from state to state.
+At the beginning of the process a is taken to be 1, and the answer is given by the value of a at the end of the process.
+---
+## Fast Multiplication (if you can add)
+Given
+```clojure
+(defn (* a b)
+  (if (= b 0)
+      0
+      (+ a (* a (dec b)))))
+```
+* Define a fast *, given functions `double` and `half` (Ex 1.17)
+* Make an iterative version (Ex 1.18)
+
+---
+# Fast Fibonacci
+```clojure
+(defn fast-fib
+  ([n] (fast-fib  1 0 0 1 n))
+  ([a b p q count]
+     (cond (= count 0)
+           b
+           (even? count)
+           (recur a
+                  b
+                  ;; Find p'
+                  ;; Find q'
+                  (/ count 2))
+           :else
+           (recur (+ (* b q)
+                     (* a q)
+                     (* a p))
+                  (+ (* b p)
+                     (* a q))
+                  p
+                  q
+                  (dec count)))))
+```
+(Ex 1.19) (TODO add hints)
+---
+# Greatest Common Divisors
+
+---
+# Euclid's Algorithm
+```clojure
+(defn gcd [a b]
+  (if (= b 0)
+    a
+    (recur b (rem a b))))
+```
+---
+# Exercise (SICP 1.20)
+
+The process that a procedure generates is of course dependent on the rules usedby the interpreter. As an example, consider the iterative gcd procedure given on the previous slide.
+
+Using the substitution method (for normal order), illustrate the process generated in evaluating (gcd 206 40) and indicate the remainder operations that are actually performed.
+
+How many remainder operations are actually performed in
+* the normal-order evaluation of (gcd 206 40) ?
+* the applicative-order evaluation?
+
+---
+# Testing for primality
