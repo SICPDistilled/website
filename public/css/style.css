@@ -439,7 +439,8 @@ body {
     position: fixed;
     top: 0;
     bottom: 0;
-    width: 350px;
+    width: 20%;
+    max-width: 350px;
     padding: 10px;
     background-color: #592064;
     color: white;
@@ -464,7 +465,8 @@ body {
 
 .menu--push {
     padding-left: 50px;
-    margin-left: 350px;
+    padding-right: 50px;
+    margin-left: 20%;
 }
 
 .menu a {
