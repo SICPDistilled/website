@@ -4,7 +4,7 @@ require 'omniauth-github'
 require 'octokit'
 require 'haml'
 require 'redcarpet'
-require "sinatra/reloader" if development?
+require 'sinatra/reloader' if development?
 
 use Rack::Session::Cookie
 
@@ -61,10 +61,10 @@ end
 get '/section/:id/' do
   require_logon!
   id = params[:id]
-  if File.exists?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.markdown"))
+  if File.file?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.markdown"))
     markdown "/section/#{id}".to_sym
   else
-   markdown :coming_soon
+    markdown :coming_soon
   end
 end
 
