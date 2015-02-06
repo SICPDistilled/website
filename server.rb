@@ -18,8 +18,6 @@ configure do
   set :haml, :layout => :layout
 end
 
-
-
 set :session_secret, ENV['SESSION_SECRET'] || 'sssshhhh'
 
 use OmniAuth::Builder do
@@ -57,6 +55,7 @@ not_found do
 end
 
 get '/section/:id/' do
+  require_logon!
   id = params[:id]
   if File.exists?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.markdown"))
     markdown "/section/#{id}".to_sym
@@ -66,6 +65,7 @@ get '/section/:id/' do
 end
 
 get '/slides/:id/' do
+  require_logon!
   @id = params[:id]
   erb :presentation
 end
