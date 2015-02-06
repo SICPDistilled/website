@@ -325,9 +325,85 @@ The process that a procedure generates is of course dependent on the rules usedb
 
 Using the substitution method (for normal order), illustrate the process generated in evaluating (gcd 206 40) and indicate the remainder operations that are actually performed.
 
-How many remainder operations are actually performed in
-* the normal-order evaluation of (gcd 206 40) ?
-* the applicative-order evaluation?
+How many remainder operations are actually performed in evaluation of (gcd 206 40)
+
+* with normal-order evaluation?
+* with applicative-order evaluation?
 
 ---
 # Testing for primality
+
+--
+
+```clojure
+(defn smallest-divisor [n]
+  (find-divisior n 2))
+```
+
+--
+
+```clojure
+(defn- find-divisior [n test-divisor]
+  (cond (> (square test-divisor) n)
+        n
+
+        (divides? test-divisor n)
+        test-divisor
+
+        :else
+        (recur n
+               (inc test-divisor))))
+```
+
+--
+
+```clojure
+(defn divides? [a b]
+  (= (rem b a) 0))
+```
+
+---
+# Prime?
+
+```clojure
+(defn prime? [n]
+  (= n (smallest-divisor n)))
+```
+
+---
+# Congruance
+
+---
+# Fermat’s Little Theorem:
+If n is a prime number and a is any positive integer less than n , then a raised to
+the n th power is congruent to a modulo n .
+
+--
+# Fermat Test
+* If n is not prime then most `a<n` will not satisfy above.
+* Try lots of examples, one failing proves the number is not prime
+
+---
+# Fermat Test
+
+```clojure
+(defn fermat-test [n]
+  (let [a (inc (rand-int (dec n)))]
+    (= (expmod a n n) a)))
+```
+
+--
+
+```clojure
+(defn expmod [base exp m]
+  (cond (= exp 0)
+        1
+
+        (even? exp)
+        (rem (square (expmod base (/ exp 2) m))
+             m)
+
+        :else
+        (rem (* base (expmod base (dec exp) m))
+             m)))
+```
