@@ -5,6 +5,6 @@ gem 'sinatra'
 gem 'omniauth'
 gem 'omniauth-github'
 gem "octokit"
-gem 'thin'
+gem 'puma'
 gem 'haml'
 gem 'redcarpet'
