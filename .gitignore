@@ -1,0 +1,7 @@
+*.txt
+*.nt
+*.csv
+*.sql
+*.dump
+*.log
+.env
