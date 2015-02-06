@@ -463,8 +463,8 @@ body {
 }
 
 .menu--push {
-    padding-left: 350px;
-
+    padding-left: 50px;
+    margin-left: 350px;
 }
 
 .menu a {
@@ -472,7 +472,8 @@ body {
     text-decoration: none;
     display: block;
     padding: 5px 15px;
-    /* transition: .1s background-color; */
+    transition: 1s background-color;
+
 }
 
 .menu a:hover {
@@ -480,8 +481,8 @@ body {
 }
 
 .container {
-  position: relative;
-  width: 100%;
-  max-width: 90%;
-  margin: 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 90%;
+    padding-top: 10px;
 }
