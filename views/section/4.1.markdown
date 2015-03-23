@@ -1,0 +1,83 @@
+# The Metacircular Evaluator
+<blockquote>Steve Russell said, look, why don't I program this eval..., and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing. But he went ahead and did it. That is, he compiled the eval in my paper into IBM 704 machine code, fixing bug, and then advertised this as a Lisp interpreter, which it certainly was. So at that point Lisp had essentially the form that it has today..."<cite>John McCarthy</cite></blockquote>
+
+The interpreter for a programming language is **just another program**
+
+# Eval and Apply
+<img src="/images/evalapply.png" width="100%">
+
+The core of our interpreter is the interaction between the two mutually recursive functions `eval` and `apply`
+
+We have spent a while building up a mental model of how Clojure evaluates the s-expressions that constitute our programs.
+
+In words it looks something like this:
+
+## Eval
+### Primitive expressions
+* Some things (like numbers) evaluate to themselves
+* Variables need to be fetched from the current environment
+
+### Special Forms
+* `quote`: Return the thing quoted (without it being evaluated)
+* `def`: Assign the name to the (evaluated) expression
+* `if`
+* `cond`
+* `fn`: Create a function, closing over the current environment
+
+### Evaluating Combinations
+* Evaluate the subexpressions of the combination
+* Apply the procedure that is the value of the leftmost subexpression (the operator) to the arguments that are the values of the other subexpressions (the operands)
+
+## Apply
+### Primitives
+* Apply them to their arguments
+
+### functions made with fn (ie 'compound procedures')
+
+* Evaluate the body *in an environment where the formal parameters are assigned to the arguments*
+
+## As Code
+
+```clojure
+(defn eval
+  ([sexp] (eval sexp {}))
+  ([sexp env]
+     (cond (self-evaluating? sexp) ;; if it is self evaluating
+           [sexp env]              ;; it evaluates to itself, and does not change the environment
+
+           (variable? sexp)        ;; If it is a symbol
+           [(env sexp) env]        ;; the value is fetched from the environment, which is unchanged
+
+           (def? sexp)                                    ;; If it is a def,
+           [nil (let [name (def-name sexp)                ;; we fetch out the symbol being bound
+                      raw-value (def-value sexp)          ;; the value to be bound
+                      value (value-of (eval value env))]  ;; evaluate it
+                  (assoc env name value))]                ;; and extend the environment with the name/value (returning nil)
+
+           (application? sexp)                            ;; For all other cases, assume it is procedure being applied
+           [(apply (value-of (eval (operator sexp) env))  ;; Call apply on the evaluated operator
+              (map (fn [operand]                          ;; and with the evaluated operands
+                     (value-of (eval operand env)))
+                   (operands sexp)))
+            env]                                          ;; Again the environment is unchanged
+
+           :else
+           (error "EVAL FAIL" sexp))))
+```
+
+```clojure
+(defn apply [proc args]
+  (cond
+   (primitive-procedure proc)
+   (apply-primative-procedure proc args)
+
+   (compound-procedure? proc)
+   (eval (:body proc)
+         (merge
+          (:env proc)
+          (zipmap (:params proc)
+                  args)))
+
+   :else
+   (error "apply-proc error")))
+```
