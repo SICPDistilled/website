@@ -2,8 +2,11 @@
 %html
   %head
     %title SICP Distilled
-    %link{ href: '/css/style.css', rel: :stylesheet }
+    %link{ href: '/css/style.css', rel: "stylesheet" }
+    %link{ href: '/css/github.min.css', rel: "stylesheet" }
     %link{ href: "http://fonts.googleapis.com/css?family=Droid+Serif", rel: 'stylesheet', type:'text/css' }
+    %script{ src: "/highlight.js" }
+    %script hljs.initHighlightingOnLoad();
   %body
     .menu
       %img.menu__header{ src: '/images/sicp2.jpg', alt: "SICP Distilled"}
@@ -61,4 +64,4 @@
             4.4 - Logic Programming
 
     .container.menu--push
-      = yield
+      ~ yield
