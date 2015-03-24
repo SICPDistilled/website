@@ -487,36 +487,36 @@ body {
     padding-top: 10px;
 }
 
-      blockquote {
-font-family: Georgia, serif;
-font-size: 16px;
-font-style: italic;
-margin: 0.25em 0;
-padding: 0.25em 40px;
-line-height: 1.45;
-position: relative;
-color: #383838;
+blockquote {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-style: italic;
+    margin: 0.25em 0;
+    padding: 0.25em 40px;
+    line-height: 1.45;
+    position: relative;
+    color: #383838;
 }
 
 blockquote:before {
-display: block;
-content: "\201C";
-font-size: 80px;
-position: absolute;
-left: -20px;
-top: -20px;
-color: #7a7a7a;
+    display: block;
+    content: "\201C";
+    font-size: 80px;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    color: #7a7a7a;
 }
 
 blockquote cite {
-color: #999999;
-/* font-size: 14px; */
-display: block;
-margin-top: 5px;
+    color: #999999;
+    /* font-size: 14px; */
+    display: block;
+    margin-top: 5px;
 }
 
 blockquote cite:before {
-content: "\2014 \2009";
+    content: "\2014 \2009";
 }
 
 .container img { max-width: 800px; }
