@@ -14,7 +14,7 @@ If you had such a procedure, you could implement:
 (defn (try p)
   (if (halts? p p)
   (run-forever)
-  ’halted))
+  'halted))
 ```
 
 and now think about running `(try try)` and show that any possible outcome (either halting or running forever) violates the intended behaviour of `halts?`
