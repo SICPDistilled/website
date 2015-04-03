@@ -1,7 +1,7 @@
 # The Metacircular Evaluator
-<blockquote>Steve Russell said, look, why don't I program this eval..., and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing. But he went ahead and did it. That is, he compiled the eval in my paper into IBM 704 machine code, fixing bug, and then advertised this as a Lisp interpreter, which it certainly was. So at that point Lisp had essentially the form that it has today..."<cite>John McCarthy</cite></blockquote>
+<blockquote>Steve Russell said, look, why don't I program this eval..., and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing. But he went ahead and did it. That is, he compiled the eval in my paper into IBM 704 machine code, fixing a bug, and then advertised this as a Lisp interpreter, which it certainly was. So at that point Lisp had essentially the form that it has today..."<cite>John McCarthy</cite></blockquote>
 
-The interpreter for a programming language is **just another program**
+The most important lesson of SICP is perhaps that the interpreter for a programming language is *just another program*
 
 # Eval and Apply
 <img src="/images/evalapply.png" width="100%">
@@ -15,7 +15,7 @@ In words it looks something like this:
 ## Eval
 ### Primitive expressions
 * Some things (like numbers) evaluate to themselves
-* Variables need to be fetched from the current environment
+* Variables need to be looked up in the current environment
 
 ### Special Forms
 * `quote`: Return the thing quoted (without it being evaluated)
@@ -36,48 +36,347 @@ In words it looks something like this:
 
 * Evaluate the body *in an environment where the formal parameters are assigned to the arguments*
 
-## As Code
+# As Code
+### Destructuring
+We make heavy use of destructuring, if you don't know how it works, see [this](http://blog.jayfields.com/2010/07/clojure-destructuring.html) blog post from Jay Fields
+
+### Quick note on state
+In order to have a purely functional interpreter we rely on eval-sexp returning a `State` that contains both the value of the passed in s-expression and a (potentially updated) environment. I chose Clojure maps for the environment as it simplified implementation massively.
+
+SICP actually relies on mutation and an associative data structure they create from `cons` cells, I think this version brings out the idea in a cleaner way and you see sooner all the code needed to run it yourself (< 100 lines).
+
+## Eval
+```clojure
+(defn eval-sexp [sexp env]
+  (cond
+   (self-evaluating? sexp)  ; If it is self evaluating
+   (State. sexp env)        ; return it and dont change env
+
+   (primitive-procedure-name? sexp)             ; if it's a primative procedure
+   (State. (primitive-procedure-map sexp) env)  ; look it up in primitive-procedure-map
+
+   (symbol? sexp)           ; If it is a symbol
+   (State. (env sexp) env)  ; Look it up in env, env unchanged
+
+   (seq? sexp)                 ; Otherwise, it's a sequence
+   (let [[op & operands] sexp] ; We destructure the operator and operands
+     (cond
+      (= op 'def)                           ; If it's a def
+      (State. 'NIL                          ; Return nil and
+              (let [[name exp] operands     ; Fetch out the name and expression
+                    value (eval exp env)]   ; evaluate the expression
+                (assoc env name value)))    ; and assoc the name in the env to the value
+
+      (= op 'if)                            ; If it's an if
+      (State. (eval-if sexp env) env)       ; evaluate it using a special rule and don't change the env
+
+      (= op 'fn)                          ; If it's a fn
+      (let [[params body] operands]       ; destructure the params and body from operands
+        (State. (Proc. params body env)   ; Return a Proc of the parameters and body that closes over the current env
+                env))                     ; Without changing it
+
+      :else                                     ; Otherwise
+      (State. (apply (eval op env)              ; We assume it's a function call and apply the evaluated operator
+                     (map (fn [operand]         ;   (which may be a primitive or a Proc)
+                            (eval operand env)) ; to the evaluated operands
+                          operands))
+              env)))                            ; again, without changing the environment
+
+   :else
+   (error "EVAL FAIL: " sexp)))
+```
+
+## Apply
+```clojure
+(defn apply [proc args]
+  (cond
+   (primitive-procedure? proc)   ; if it's a primitive procedure
+   (clj-apply proc args)         ; apply it (in Clojure) to the args
+
+   (compound-procedure? proc)    ; if it's a compound procedure
+   (eval (:body proc)            ; evaluate the body
+         (merge                  ; in a new environment made
+          (:env proc)            ; by taking the environment closed over on creation
+          (zipmap (:params proc) ; and assigning the formal parameters to arguments
+                  args)))
+
+   :else
+   (error "APPLY FAIL: " proc args)))
+```
+Even though we have not yet seen the definitions of a few of the functions called by `eval` and `apply`, I hope you agree that's pretty amazing!
+
+First a few helpers, `eval-sexp` takes an s-expression and an environment and returns a `State` that has both a `result` and a new environment
+
+```clojure
+(defrecord State [result env])
+```
+
+While `eval-sexp` returns a `State`, eval returns the resulting value and can be called without an environment (by automatically passing the empty environment)
 
 ```clojure
 (defn eval
   ([sexp] (eval sexp {}))
   ([sexp env]
-     (cond (self-evaluating? sexp) ;; if it is self evaluating
-           [sexp env]              ;; it evaluates to itself, and does not change the environment
+     (:result (eval-sexp sexp env))))
+```
 
-           (variable? sexp)        ;; If it is a symbol
-           [(env sexp) env]        ;; the value is fetched from the environment, which is unchanged
+### Booleans
+We can use the symbols `TRUE` and `FALSE` as Boolean's
 
-           (def? sexp)                                    ;; If it is a def,
-           [nil (let [name (def-name sexp)                ;; we fetch out the symbol being bound
-                      raw-value (def-value sexp)          ;; the value to be bound
-                      value (value-of (eval value env))]  ;; evaluate it
-                  (assoc env name value))]                ;; and extend the environment with the name/value (returning nil)
+```clojure
+(def bools #{'TRUE 'FALSE})
+```
 
-           (application? sexp)                            ;; For all other cases, assume it is procedure being applied
-           [(apply (value-of (eval (operator sexp) env))  ;; Call apply on the evaluated operator
-              (map (fn [operand]                          ;; and with the evaluated operands
-                     (value-of (eval operand env)))
-                   (operands sexp)))
-            env]                                          ;; Again the environment is unchanged
+### What in our language is self-evaluating?
+Numbers in our language are just Clojure's numbers, which in turn are Java numbers, we leave them as-is.
 
-           :else
-           (error "EVAL FAIL" sexp))))
+Also the bools above will be self-evaluating
+
+```clojure
+(defn self-evaluating? [sexp]
+  (or (number? sexp)
+      (bools sexp)))
+```
+
+### Primitives
+
+```clojure
+(def primitive-procedure-map { '+ + '- - '* * '/ / })
+```
+
+Primitive procedures, are stored in a Clojure map, keyed by the symbol that represents them. This is subtle and you should think about it for a while.
+
+The symbol '+ is mapping to the value of + looked up by the *Clojure* interpreter, ie the function itself.
+
+We add some predicates to check if something is either the Clojure function we want to use as a primitive or the name we gave it.
+
+```clojure
+(def primitive-procedure-name? (set (keys primitive-procedure-map)))
+(def primitive-procedure? (set (vals primitive-procedure-map)))
+```
+
+Note that nothing is special about the names, or the fact that we are using things that happen to be primitive in Clojure too, we could have done
+
+```clojure
+(def primitive-procedure-map { 'plus + 'minus - 'sq #(* % %) })
+```
+
+### Environments
+You can see that environments in our interpreter are Clojure maps, the keys are symbols and we lookup symbols in the current environment.
+
+## Evaluating lists
+We are looking at something like `(<operator> <operand1> <operand2> ...)`
+
+### def
+calling `(def <name> <sexp>)` adds the value of evaluating sexp in the current env to the environment
+
+### if
+to evaluate `if` we need a special evaluation rule, note how we only evaluate one of predicate and alternative
+
+```clojure
+(defn eval-if [[_ pred consequent alternative] env]
+  (if (true? (eval pred env))
+    (eval consequent env)
+    (if (nil? alternative)
+      'NIL
+      (eval alternative env))))
+```
+
+Crucially here `true?` is not Clojure's `true?`
+
+```clojure
+(defn true? [sexp]
+  (not= 'FALSE sexp))
+```
+
+So in our language, anything that is not `FALSE` is truthy
+
+Also we return our languages `NIL` if the predicate is false and we don't have an alternative.
+
+### fn
+If an expression is a `fn` expression we return a `Proc` object and don't change the environment.
+
+```clojure
+(defrecord Proc [params body env])
+```
+
+## Programs
+In our simplifed interpreter, a program is just a list of s-expressions and the result is the return value of the last one.
+
+We can:
+
+* name things with `def`
+* lookup things in an environment (here we just use Clojure maps)
+* create functions with `fn`
+* apply primitive procedures
+* apply compound procedures
+
+So can run some simple programs, such as:
+
+```clojure
+(def a 2)
+a
 ```
 
 ```clojure
-(defn apply [proc args]
-  (cond
-   (primitive-procedure proc)
-   (apply-primative-procedure proc args)
-
-   (compound-procedure? proc)
-   (eval (:body proc)
-         (merge
-          (:env proc)
-          (zipmap (:params proc)
-                  args)))
-
-   :else
-   (error "apply-proc error")))
+(def a 2)
+(def b 3)
+(+ a b)
 ```
+
+and
+
+```clojure
+(def a 2)
+(def square (fn [x]
+               (* x x)))
+(square a)
+```
+
+The idea is to thread the evaluation through all the s-expressions using `reduce`
+
+```clojure
+(defn next-state [last-state sexp]
+  (let [env (:env last-state)]
+    (eval-sexp sexp env)))
+
+(def initial-state (State. 'NIL {}))
+
+(defn eval-program [sexps]
+  (:result (reduce next-state initial-state sexps)))
+```
+
+We start with a `State` that has `NIL` as the return value and the empty environment and update it by evaluating the s-expressions one by one.
+
+You can see that the function passed to reduce only looks at the `env` in the state. This is correct, without side-effects there is no point doing anything other than `def` in all bar the last s-expression as only that is returned.
+
+```clojure
+(def a 2)
+(+ a 1)
+(+ a 2)
+```
+
+will return 4, the second line achieves nothing
+
+# Derived Expressions
+We have not yet implemented `cond` or `let`, we could go and make a special evaluation rule as we did for `if` but a useful trick is to rewrite the expression in terms of previously defined special form.
+
+## `cond`
+We can rewrite
+
+```clojure
+(cond (> x 0)
+      x
+      (<= x 0)
+      (- x))
+```
+
+as
+
+```clojure
+(if (> x 0)
+  x
+  (if (<= x 0)
+    (- x)))
+```
+
+To do this in our interpreter we can just add another clause to our `cond` in `eval-sexp` where we recursively call with a transformed s-expression
+
+```clojure
+(= op 'cond)
+(eval-sexp (cond->if sexp) env)
+```
+
+The cond->if function looks like this:
+
+```clojure
+(defn pairs->if [[pred consequence & pairs]]
+  (if (nil? pairs)
+    (make-if pred consequence)
+    (make-if pred
+             consequence
+             (pairs->if pairs))))
+
+(defn cond->if [[_ & pairs]]
+  (pairs->if pairs))
+```
+
+Using this helper to build `if` expressions
+
+```clojure
+(defn make-if
+  ([pred consequence]
+     (list 'if pred consequence))
+  ([pred consequence alternative]
+     (list 'if pred consequence alternative)))
+```
+
+## `let`
+As `let` is a way to create a new scope with some symbols (re-)bound to expressions, we can actually rewrite it as a function application (remember that we apply compound functions is to evaluate the body in an environment where the formal parameters are assigned to the arguments)
+
+```clojure
+(let [a 1
+      b 2]
+  (+ a b))
+```
+
+Can be rewritten as
+
+```clojure
+((fn [a b]
+  (+ a b))
+ 1 2)
+```
+
+Again, we can add another clause to `eval-sexp`
+
+```clojure
+(= op 'let)
+(eval-sexp (let->fn sexp) env)
+```
+
+Here is the function that does the transformation
+
+```clojure
+(defn let->fn [[_ bindings body]]
+  (let [params (take-nth 2 bindings)
+        args (take-nth 2 (rest bindings))]
+    (cons
+     (make-fn params body)
+     args)))
+```
+
+We destructure out the bindings, in our case `('a 1 'b 2)`, and the body `(+ a b)`, we create a function with `a` and `b` as the formal parameters, immediately called with 1 and 2 as arguments
+
+# Exercises
+First download the project from [Github](https://github.com/SICPDistilled/minilisp)
+
+## `and` and `or`
+Add `and` and `or` to the interpreter, with tests.
+
+Do one as a special form and one as a derived expression
+
+(you should check out [lein autoexpect](https://github.com/jakemcc/lein-autoexpect) )
+
+## `let*`
+`let` in our language does not behave like Clojures, which allows bindings to refer to previous ones.
+
+Add a function `let*`, such that
+
+```clojure
+(let* [x 3
+       y (+ x 2)
+       z (+ x y 5)]
+  (* x z))
+```
+
+returns 39
+
+Try and do it as a special form, and a derived expression (and add tests)
+
+Can we use `let` (ie derive from a derived expression)?
+
+## Iteration
+We can express iterations as recursive function calls, but sometimes it is convenient to have iteration constructs
+
+Can you add `while`, `for`, `until` constructs? (not necessarily matching any existing Clojure definitions)
