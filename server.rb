@@ -28,6 +28,10 @@ use OmniAuth::Builder do
   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
 end
 
+def environment
+  ENV['RACK_ENV']
+end
+
 def github
   @github ||= Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
 end
