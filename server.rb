@@ -65,7 +65,7 @@ end
 get '/section/:id/' do
   require_logon!
   id = params[:id]
-  if File.file?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.markdown"))
+  if File.file?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.md"))
     markdown "/section/#{id}".to_sym
   else
     markdown :coming_soon
