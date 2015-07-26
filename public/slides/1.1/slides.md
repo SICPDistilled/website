@@ -80,7 +80,7 @@ Allow compound elements to be named and manipulated
 ---
 # Naming Things
 
-    > (define a 2)
+    > (def a 2)
 --
     #'user/a
 
