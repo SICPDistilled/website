@@ -427,6 +427,7 @@ th {
 }
 
 /* Mine */
+
 * {
     box-sizing: border-box
 }
@@ -449,9 +450,28 @@ body {
     font-size: medium;
 }
 
+.menu title {
+
+}
+
+.menu h2 {
+    font-size: 1.25em;
+    padding: 0;
+}
+
+.menu li {
+    /* font-size: medium; */
+}
+
 .menu__list {
     padding: 0;
     list-style: none;
+}
+
+.menu__list_2 {
+    padding: 0 0 0 1em;
+    list-style: none;
+    font-size: smaller;
 }
 
 .menu__title {
