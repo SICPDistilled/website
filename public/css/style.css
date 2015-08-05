@@ -434,7 +434,7 @@ th {
 
 body {
     font-family: 'Droid Serif', serif;
-    font-size: larger;
+    font-size: large;
 }
 
 .menu {
@@ -450,17 +450,9 @@ body {
     font-size: medium;
 }
 
-.menu title {
-
-}
-
 .menu h2 {
     font-size: 1.25em;
     padding: 0;
-}
-
-.menu li {
-    /* font-size: medium; */
 }
 
 .menu__list {
@@ -497,7 +489,6 @@ body {
     display: block;
     padding: 5px 15px;
     transition: 1s background-color;
-
 }
 
 .menu a:hover {
