@@ -1,9 +1,11 @@
-# blackjack
-Checkout the project from [Github]()
+# Blackjack
+Testing your understanding of higher order functions by creating strategys for [Blackjack](https://en.wikipedia.org/wiki/Blackjack) (also called Pontoon or 21)
+
+Checkout the project from [Github](https://github.com/SICPDistilled/blackjack)
 
 Join the chat at [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/SICPDistilled/blackjack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Testing your understanding of higher order functions by creating strategys for [Blackjack](https://en.wikipedia.org/wiki/Blackjack) (also called Pontoon or 21)
+
 
 We are going to build an increasingly complex model of playing Blackjack alongside strategys to play the game
 
@@ -78,6 +80,3 @@ Write a procedure that takes a list of strategies and hits if a majority say the
 
 #### Just one more
 Write a procedure that takes a strategy and returns a strategy that always stops one card later than the original
-
-## License
-Copyright © 2015 Tom Hall
