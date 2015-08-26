@@ -54,8 +54,7 @@ get '/sign-in' do
 end
 
 get '/' do
-  require_logon!
-  haml :index
+  redirect '/section/1-intro'
 end
 
 not_found do
