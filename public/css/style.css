@@ -484,14 +484,17 @@ body {
 }
 
 .menu a {
-    color: inherit;
+    color: grey;
     text-decoration: none;
     display: block;
     padding: 5px 15px;
     transition: 1s background-color;
 }
 
-.menu a:hover {
+.menu .done a {
+    color: inherit;
+}
+.menu .done a:hover {
     background-color: #b058ba
 }
 
@@ -499,6 +502,8 @@ body {
     position: relative;
     padding-top: 10px;
 }
+
+.container img { max-width: 800px; }
 
 blockquote {
     font-family: Georgia, serif;
@@ -531,5 +536,3 @@ blockquote cite {
 blockquote cite:before {
     content: "\2014 \2009";
 }
-
-.container img { max-width: 800px; }
