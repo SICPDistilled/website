@@ -11,6 +11,7 @@ programming language and uses the fact that Clojure has first class
 functions. Higher Order Functions is one of the main ideas in the book.
 
 # What changed
+
 SICP is very careful to always refer to *procedures* in programs and
 reserves *function* for mathematical functions. I took the decision
 (though was very conflicted) of saying *functions*, *mathematical
@@ -23,6 +24,7 @@ etc are in common enough use that it is better to use them. This may
 change and I am interested to know what you think.
 
 # What got left out
+
 Sections 1.1 and 1.2 are mostly complete, if I can think of a
 different example to replace Newtons Method I may well do it.
 
@@ -35,6 +37,7 @@ more sense with a collection of coins)
 I took the Blackjack exercise from the [projects](https://mitpress.mit.edu/sicp/psets/) page
 
 # Other resources
-If you want to really understand recursion, check out
-[The Litte Schemer](http://amzn.to/1hIHKIS) (it goes on to things that appear later in the
-presentation here too)
+
+If you want to really understand recursion, check
+out [The Litte Schemer](http://amzn.to/1hIHKIS) (it goes on to things
+that appear later in the presentation here too)
