@@ -12,7 +12,8 @@ Tilt.register Tilt::RedcarpetTemplate::Redcarpet2, 'markdown', 'mkd', 'md'
 
 set :markdown, :fenced_code_blocks => true,
                :layout_engine => :haml,
-               :layout => :layout
+               :layout => :layout,
+               :no_intra_emphasis => true
 
 configure do
   set :haml, :layout => :layout
