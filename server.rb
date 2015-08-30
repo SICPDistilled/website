@@ -55,7 +55,7 @@ get '/sign-in' do
 end
 
 get '/' do
-  redirect '/section/1-intro'
+  redirect '/section/1-distilled'
 end
 
 not_found do
