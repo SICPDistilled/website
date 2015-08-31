@@ -34,7 +34,7 @@ def environment
 end
 
 before do
-  cache_control :public, :must_revalidate, :max_age => 600
+  cache_control :public, :max_age => 600
 end
 
 # def github
