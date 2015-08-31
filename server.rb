@@ -33,6 +33,10 @@ def environment
   ENV['RACK_ENV']
 end
 
+before do
+  cache_control :public, :must_revalidate, :max_age => 600
+end
+
 def github
   @github ||= Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
 end
