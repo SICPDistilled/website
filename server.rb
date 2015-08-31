@@ -63,7 +63,6 @@ not_found do
 end
 
 get '/section/:id' do
-  require_logon!
   id = params[:id]
   if File.file?(File.join(File.dirname(__FILE__), 'views', 'section', "#{id}.md"))
     markdown "/section/#{id}".to_sym
@@ -73,7 +72,6 @@ get '/section/:id' do
 end
 
 get '/slides/:id/' do
-  require_logon!
   @id = params[:id]
   erb :presentation
 end
