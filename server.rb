@@ -6,7 +6,7 @@ require 'haml'
 require 'redcarpet'
 require 'sinatra/reloader' if development?
 
-use Rack::Session::Cookie, :expire_after => 7*24*60*60
+# use Rack::Session::Cookie, :expire_after => 7*24*60*60
 
 Tilt.register Tilt::RedcarpetTemplate::Redcarpet2, 'markdown', 'mkd', 'md'
 
