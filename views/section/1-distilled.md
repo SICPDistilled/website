@@ -23,7 +23,7 @@ I think terms like *first class functions*, *higher order functions*
 etc are in common enough use that it is better to use them. This may
 change and I am interested to know what you think.
 
-# What got left out
+# What was left out
 
 Sections 1.1 and 1.2 are mostly complete, if I can think of a
 different example to replace Newtons Method I may well do it.
