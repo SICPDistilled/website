@@ -25,7 +25,9 @@ def environment
 end
 
 before do
-  cache_control :public, :max_age => 600
+  if environment == 'production'
+    cache_control :public, :max_age => 600
+  end
 end
 
 get '/' do
