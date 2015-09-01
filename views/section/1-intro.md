@@ -43,39 +43,40 @@ care, expertise, and wisdom. A small bug in a computer-aided design
 program, for example, can lead to the catastrophic collapse of an
 airplane or a dam or the self-destruction of an industrial robot.
 
-Master software engineers have the ability to organize programs so that
-they can be reasonably sure that the resulting processes will perform
-the tasks intended. They can visualize the behavior of their systems in
-advance. They know how to structure programs so that unanticipated
-problems do not lead to catastrophic consequences, and when problems do
-arise, they can *debug* their programs. Well-designed computational
-systems, like well-designed automobiles or nuclear reactors, are
-designed in a modular manner, so that the parts can be constructed,
-replaced, and debugged separately.
+Master software engineers have the ability to organize programs so
+that they can be reasonably sure that the resulting processes will
+perform the tasks intended. They can visualize the behavior of their
+systems in advance. They know how to structure programs so that
+unanticipated problems do not lead to catastrophic consequences, and
+when problems do arise, they can *debug* their programs. Well-designed
+computational systems, like well-designed automobiles or nuclear
+reactors, are designed in a modular manner, so that the parts can be
+constructed, replaced, and debugged separately.
 
 ## Programming in Lisp
 
 We need an appropriate language for describing processes, and we will
-use for this purpose the programming language Lisp. Just as our everyday
-thoughts are usually expressed in our natural language (such as English,
-French, or Japanese), and descriptions of quantitative phenomena are
-expressed with mathematical notations, our procedural thoughts will be
-expressed in Lisp. Lisp was invented in the late 1950s as a formalism
-for reasoning about the use of certain kinds of logical expressions,
-called *recursion equations*, as a model for computation. The language
-was conceived by John McCarthy and is based on his paper “Recursive
-Functions of Symbolic Expressions and Their Computation by Machine”
-([McCarthy 1960](References.xhtml#McCarthy-1960)).
+use for this purpose the programming language Lisp. Just as our
+everyday thoughts are usually expressed in our natural language (such
+as English, French, or Japanese), and descriptions of quantitative
+phenomena are expressed with mathematical notations, our procedural
+thoughts will be expressed in Lisp. Lisp was invented in the late
+1950s as a formalism for reasoning about the use of certain kinds of
+logical expressions, called *recursion equations*, as a model for
+computation. The language was conceived by John McCarthy and is based
+on his paper “Recursive Functions of Symbolic Expressions and Their
+Computation by Machine”
+[McCarthy 1960](http://www-formal.stanford.edu/jmc/recursive.pdf)
 
 Despite its inception as a mathematical formalism, Lisp is a practical
-programming language. A Lisp *interpreter* is a machine that carries out
-processes described in the Lisp language. The first Lisp interpreter was
-implemented by McCarthy with the help of colleagues and students in the
-Artificial Intelligence Group of the MIT Research Laboratory of
-Electronics and in the MIT Computation Center.[1](#FOOT1) Lisp, whose
-name is an acronym for LISt Processing, was designed to provide
-symbol-manipulating capabilities for attacking programming problems such
-as the symbolic differentiation and integration of algebraic
+programming language. A Lisp *interpreter* is a machine that carries
+out processes described in the Lisp language. The first Lisp
+interpreter was implemented by McCarthy with the help of colleagues
+and students in the Artificial Intelligence Group of the MIT Research
+Laboratory of Electronics and in the MIT Computation Center. Lisp,
+whose name is an acronym for LISt Processing, was designed to provide
+symbol-manipulating capabilities for attacking programming problems
+such as the symbolic differentiation and integration of algebraic
 expressions. It included for this purpose new data objects known as
 atoms and lists, which most strikingly set it apart from all other
 languages of the period.
@@ -92,7 +93,7 @@ Fortran is older), to continually adapt to encompass the most modern
 ideas about program design. Thus, Lisp is by now a family of dialects,
 which, while sharing most of the original features, may differ from one
 another in significant ways. The dialect of Lisp used in this book is
-called Scheme.[^2^](#FOOT2)
+called Clojure
 
 Because of its experimental character and its emphasis on symbol
 manipulation, Lisp was at first very inefficient for numerical
@@ -124,47 +125,3 @@ Lisp an excellent language for writing programs that must manipulate
 other programs as data, such as the interpreters and compilers that
 support computer languages. Above and beyond these considerations,
 programming in Lisp is great fun.
-
-### Footnotes
-
-[1]<a name="FOOT1"></a> The Lisp 1 Programmer’s Manual appeared in 1960 and the
-Lisp 1.5 Programmer’s Manual ([McCarthy et al.
-1965](References.xhtml#McCarthy-et-al_002e-1965)) was published in 1962.
-The early history of Lisp is described in [McCarthy
-1978](References.xhtml#McCarthy-1978).
-
-[^2^](#DOCF2) The two dialects in which most major Lisp programs of the
-1970s were written are MacLisp ([Moon 1978](References.xhtml#Moon-1978);
-[Pitman 1983](References.xhtml#Pitman-1983)), developed at the MIT
-Project MAC, and Interlisp ([Teitelman
-1974](References.xhtml#Teitelman-1974)), developed at Bolt Beranek and
-Newman Inc. and the Xerox Palo Alto Research Center. Portable Standard
-Lisp ([Hearn 1969](References.xhtml#Hearn-1969); [Griss
-1981](References.xhtml#Griss-1981)) was a Lisp dialect designed to be
-easily portable between different machines. MacLisp spawned a number of
-subdialects, such as Franz Lisp, which was developed at the University
-of California at Berkeley, and Zetalisp ([Moon and Weinreb
-1981](References.xhtml#Moon-and-Weinreb-1981)), which was based on a
-special-purpose processor designed at the MIT Artificial Intelligence
-Laboratory to run Lisp very efficiently. The Lisp dialect used in this
-book, called Scheme ([Steele and Sussman
-1975](References.xhtml#Steele-and-Sussman-1975)), was invented in 1975
-by Guy Lewis Steele Jr. and Gerald Jay Sussman of the MIT Artificial
-Intelligence Laboratory and later reimplemented for instructional use at
-MIT. Scheme became an IEEE standard in 1990 ([IEEE
-1990](References.xhtml#IEEE-1990)). The Common Lisp dialect ([Steele
-1982](References.xhtml#Steele-1982), [Steele
-1990](References.xhtml#Steele-1990)) was developed by the Lisp community
-to combine features from the earlier Lisp dialects to make an industrial
-standard for Lisp. Common Lisp became an ANSI standard in 1994 ([ANSI
-1994](References.xhtml#ANSI-1994)).
-
-[^3^](#DOCF3) One such special application was a breakthrough
-computation of scientific importance—an integration of the motion of the
-Solar System that extended previous results by nearly two orders of
-magnitude, and demonstrated that the dynamics of the Solar System is
-chaotic. This computation was made possible by new integration
-algorithms, a special-purpose compiler, and a special-purpose computer
-all implemented with the aid of software tools written in Lisp ([Abelson
-et al. 1992](References.xhtml#Abelson-et-al_002e-1992); [Sussman and
-Wisdom 1992](References.xhtml#Sussman-and-Wisdom-1992)).
