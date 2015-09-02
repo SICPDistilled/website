@@ -46,9 +46,9 @@ whose denominator is the integer `d`.
 
 `(denom x)` returns the denominator of the rational number `x`.
 
-We are using here a powerful strategy of synthesis: *wishful thinking*
-.  We haven’t yet said how a rational number is represented, or how
-the functions numer , denom , and make-rat should be
+We are using here a powerful strategy of synthesis: *wishful
+thinking*. We haven’t yet said how a rational number is represented,
+or how the functions `numer`, `denom` and `make-rat` should be
 implemented. Even so, if we did have these three functions, we could
 then add, subtract, multiply, divide, and test equality by using the
 following relations:
@@ -99,9 +99,9 @@ together a numerator and a denominator to form a rational number.
 For this section we are sticking closely to the original text, soon we
 will see a more idiomatic way to do data abstraction in Clojure but
 one of the interesting things about SICP is that you build
-*everything* out of the pairs described here (I say interesting
-because it is good and bad, sometimes you get bogged down
-re-implementing maps constantly)
+*everything* out of the pairs described here (interesting because it
+is good and bad, sometimes you get bogged down re-implementing maps
+constantly)
 
 To enable us to implement the concrete level of our data abstraction,
 assume our language provides a compound structure called a pair ,
@@ -135,13 +135,13 @@ can be used to form pairs whose elements are pairs, and so on:
     stands for “Contents of Decrement part of Register.”
 
 ```clojure
-> (define x (cons 1 2))
+> (def x (cons 1 2))
 #'user/x
 
-> (define y (cons 3 4))
+> (def y (cons 3 4))
 #'user/y
 
-> (define z (cons x y))
+> (def z (cons x y))
 #'user/z
 
 > (car (car z))
@@ -153,8 +153,8 @@ can be used to form pairs whose elements are pairs, and so on:
 
 Pairs can be used as general-purpose building blocks to create all
 sorts of complex data structures. This single compound-data primitive,
-implemented by the functions `cons` , `car` , and `cdr` , is the only
-glue we *need* [^2]. Data objects constructed from pairs are called
+implemented by the functions `cons`, `car` and `cdr` is the only glue
+we *need* [^2]. Data objects constructed from pairs are called
 list-structured data.
 
 [^2]: But perhaps not all we *want*
@@ -163,8 +163,8 @@ list-structured data.
 
 Pairs offer a natural way to complete the rational-number
 system. Simply represent a rational number as a pair of two integers:
-a numerator and a denominator. Then make-rat , numer , and denom are
-readily implemented as follows:
+a numerator and a denominator. Then `make-rat`, `numer` and `denom`
+are readily implemented as follows:
 
 ```clojure
 (defn make-rat [n d]
@@ -212,9 +212,9 @@ nil
 As the final example shows, our rational-number implementation does
 not reduce rational numbers to lowest terms. We can remedy this by
 changing make-rat . If we have a gcd function like the one
-[earlier]() that produces the greatest common divisor of two integers,
-we can use gcd to reduce the numerator and the denominator to lowest
-terms before constructing the pair:
+[earlier](/section/1.2.4) that produces the greatest common divisor of
+two integers, we can use gcd to reduce the numerator and the
+denominator to lowest terms before constructing the pair:
 
 ```clojure
 (defn make-rat [n d]
@@ -232,7 +232,7 @@ nil
 
 This modification was accomplished by changing the constructor
 `make-rat` without changing any of the functions (such as `add-rat`
-and `mul-rat` ) that implement the actual operations.
+and `mul-rat`) that implement the actual operations.
 
 TODO: Work in Ex 2.1 to 'Numbers' project.
 
@@ -245,7 +245,7 @@ terms of a con- structor `make-rat` and selectors `numer` and
 `denom`. In general, the under- lying idea of data abstraction is to
 identify for each type of data object a basic set of operations in
 terms of which all manipulations of data objects of that type will be
-expressed, and then to use only those oper- ations in manipulating the
+expressed, and then to use only those operations in manipulating the
 data.
 
 We can envision the structure of the rational-number system as shown
