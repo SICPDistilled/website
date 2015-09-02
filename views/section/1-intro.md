@@ -98,10 +98,10 @@ called Clojure
 Because of its experimental character and its emphasis on symbol
 manipulation, Lisp was at first very inefficient for numerical
 computations, at least in comparison with Fortran. Over the years,
-however, Lisp compilers have been developed that translate programs into
-machine code that can perform numerical computations reasonably
-efficiently. And for special applications, Lisp has been used with great
-effectiveness.[^3^](#FOOT3) Although Lisp has not yet overcome its old
+however, Lisp compilers have been developed that translate programs
+into machine code that can perform numerical computations reasonably
+efficiently. And for special applications, Lisp has been used with
+great effectiveness. Although Lisp has not yet overcome its old
 reputation as hopelessly inefficient, Lisp is now used in many
 applications where efficiency is not the central concern. For example,
 Lisp has become a language of choice for operating-system shell
