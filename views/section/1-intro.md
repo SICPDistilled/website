@@ -110,18 +110,18 @@ design systems.
 
 If Lisp is not a mainstream language, why are we using it as the
 framework for our discussion of programming? Because the language
-possesses unique features that make it an excellent medium for studying
-important programming constructs and data structures and for relating
-them to the linguistic features that support them. The most significant
-of these features is the fact that Lisp descriptions of processes,
-called *procedures*, can themselves be represented and manipulated as
-Lisp data. The importance of this is that there are powerful
-program-design techniques that rely on the ability to blur the
-traditional distinction between “passive” data and “active” processes.
-As we shall discover, Lisp’s flexibility in handling procedures as data
-makes it one of the most convenient languages in existence for exploring
-these techniques. The ability to represent procedures as data also makes
-Lisp an excellent language for writing programs that must manipulate
-other programs as data, such as the interpreters and compilers that
-support computer languages. Above and beyond these considerations,
-programming in Lisp is great fun.
+possesses unique features that make it an excellent medium for
+studying important programming constructs and data structures and for
+relating them to the linguistic features that support them. The most
+significant of these features is the fact that Lisp descriptions of
+processes, called *functions*, can themselves be represented and
+manipulated as Lisp data. The importance of this is that there are
+powerful program-design techniques that rely on the ability to blur
+the traditional distinction between “passive” data and “active”
+processes.  As we shall discover, Lisp’s flexibility in handling
+functions as data makes it one of the most convenient languages in
+existence for exploring these techniques. The ability to represent
+functions as data also makes Lisp an excellent language for writing
+programs that must manipulate other programs as data, such as the
+interpreters and compilers that support computer languages. Above and
+beyond these considerations, programming in Lisp is great fun.
