@@ -125,7 +125,7 @@ by without numbers (at least insofar as nonnegative integers are
 concerned) by implementing `0` and the operation of adding `1` as
 
 ```clojure
-(def z (fn [f] (fn [x] x)))
+(def zero (fn [f] (fn [x] x)))
 
 (defn inc [n]
   (fn [f] (fn [x] (f ((n f) x)))))
