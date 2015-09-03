@@ -1,16 +1,19 @@
 Chapter 1 - Building Abstractions with Procedures
 -------------------------------------------------
 
-<blockquote>The acts of the mind, wherein it exerts its power over simple ideas,
-are chiefly these three: 1. Combining several simple ideas into one
-compound one, and thus all complex ideas are made. 2. The second is
-bringing two ideas, whether simple or complex, together, and setting
-them by one another so as to take a view of them at once, without
-uniting them into one, by which it gets all its ideas of relations.
-3. The third is separating them from all other ideas that accompany
-them in their real existence: this is called abstraction, and thus all
-its general ideas are made.
-<cite>John Locke, An Essay Concerning Human Understanding (1690)</cite>
+<blockquote>The acts of the mind, wherein it exerts its power over
+simple ideas, are chiefly these three: 1. Combining several simple
+ideas into one compound one, and thus all complex ideas are
+made. 2. The second is bringing two ideas, whether simple or complex,
+together, and setting them by one another so as to take a view of them
+at once, without uniting them into one, by which it gets all its ideas
+of relations.  3. The third is separating them from all other ideas
+that accompany them in their real existence: this is called
+abstraction, and thus all its general ideas are made.
+
+<cite>John Locke, An Essay Concerning Human Understanding (1690)
+</cite>
+
 </blockquote>
 
 We are about to study the idea of a *computational process*.
@@ -22,10 +25,10 @@ conjure the spirits of the computer with our spells.
 
 A computational process is indeed much like a sorcerer’s idea of a
 spirit. It cannot be seen or touched. It is not composed of matter at
-all. However, it is very real. It can perform intellectual work. It can
-answer questions. It can affect the world by disbursing money at a bank
-or by controlling a robot arm in a factory. The programs we use to
-conjure processes are like a sorcerer’s spells. They are carefully
+all. However, it is very real. It can perform intellectual work. It
+can answer questions. It can affect the world by disbursing money at a
+bank or by controlling a robot arm in a factory. The programs we use
+to conjure processes are like a sorcerer’s spells. They are carefully
 composed from symbolic expressions in arcane and esoteric *programming
 languages* that prescribe the tasks we want our processes to perform.
 
@@ -100,13 +103,11 @@ manipulation, Lisp was at first very inefficient for numerical
 computations, at least in comparison with Fortran. Over the years,
 however, Lisp compilers have been developed that translate programs
 into machine code that can perform numerical computations reasonably
-efficiently. And for special applications, Lisp has been used with
-great effectiveness. Although Lisp has not yet overcome its old
-reputation as hopelessly inefficient, Lisp is now used in many
-applications where efficiency is not the central concern. For example,
-Lisp has become a language of choice for operating-system shell
-languages and for extension languages for editors and computer-aided
-design systems.
+efficiently. Although Lisp has not yet overcome its old
+reputation as inefficient, Lisp is now used in many applications where
+efficiency is not the central concern. For example, Lisp has become a
+language of choice for operating-system shell languages and for
+extension languages for editors and computer-aided design systems.
 
 If Lisp is not a mainstream language, why are we using it as the
 framework for our discussion of programming? Because the language
