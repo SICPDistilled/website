@@ -17,11 +17,11 @@ books approach in contrast).
 
 The book builds up data structures from `cons` cells it uses them
 throughout the book. It is good in the sense you have a minimal set of
-primitives and build everything from them. If you have used another
-programming language you probably expect lots of datastructures to be
-built in Clojure is particularly nice here compared to the books
-Scheme, having lots of data structures built in, literal syntax for
-most of them and immutibility.
+primitives and build everything from them. However, if you have used
+another programming language you probably expect lots of
+datastructures to be built in. Clojure is particularly nice here
+compared to the Scheme in the book, having lots of data structures, a
+literal syntax for most of them, and immutability.
 
 I think having to roll-your-own datastructures clouds the description
 of more complex topics like the interpreter, the presentation here
@@ -41,6 +41,5 @@ do SICP' meme is not helpful.
 I make a bit more of a fuss about Church Numerals as I think it is a
 wonderful *a-ha* moment potentially buried in the questions.
 
-Obviously talking about Clojure's built-in data structures and data
-types is different and I think clarifies the presentation of sets and
-coding.
+Obviously talking about Clojure's built-in data types is different and
+I think it clarifies the presentation of sets and coding.

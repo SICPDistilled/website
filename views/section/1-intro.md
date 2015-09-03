@@ -103,11 +103,11 @@ manipulation, Lisp was at first very inefficient for numerical
 computations, at least in comparison with Fortran. Over the years,
 however, Lisp compilers have been developed that translate programs
 into machine code that can perform numerical computations reasonably
-efficiently. Although Lisp has not yet overcome its old
-reputation as inefficient, Lisp is now used in many applications where
-efficiency is not the central concern. For example, Lisp has become a
-language of choice for operating-system shell languages and for
-extension languages for editors and computer-aided design systems.
+efficiently. Although Lisp has not yet overcome its old reputation as
+inefficient, Lisp is now used in many applications where efficiency is
+not the central concern. For example, Lisp has become a language of
+choice for operating-system shell languages and for extension
+languages for editors and computer-aided design systems.
 
 If Lisp is not a mainstream language, why are we using it as the
 framework for our discussion of programming? Because the language
