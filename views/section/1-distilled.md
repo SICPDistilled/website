@@ -1,4 +1,6 @@
-# Outline of the Chapter
+# Chapter 1 Distilled
+
+## Outline of the Chapter
 
 This chapter is all about pure functions of numbers, it introduces the
 idea of *recursive* and *iterative* procedures and talks a bit about
@@ -12,7 +14,7 @@ programming language and uses the fact that Clojure has first class
 functions. Higher Order Functions is one of the main ideas in the
 book.
 
-# What changed
+## What changed
 
 SICP is very careful to always refer to *procedures* in programs and
 reserves *function* for mathematical functions. I took the decision
@@ -25,7 +27,7 @@ I think terms like *first class functions*, *higher order functions*
 etc are in common enough use that it is better to use them. This may
 change and I am interested to know what you think.
 
-# What was left out
+## What was left out
 
 Sections 1.1 and 1.2 are fairly direct translations of the book,
 though if I can think of a different example to replace Newtons Method
@@ -37,12 +39,12 @@ lots of the examples (the coin counting one for instance makes much
 more sense with a collection of coins), replacing them with few simple
 ones of my own.
 
-# What was added
+## What was added
 
 I took the Blackjack exercise from the
 [projects](https://mitpress.mit.edu/sicp/psets/) page
 
-# Other resources
+## Other resources
 
 If you want to really understand recursion, check out
 [The Litte Schemer](http://amzn.to/1hIHKIS) (it goes on to things that
