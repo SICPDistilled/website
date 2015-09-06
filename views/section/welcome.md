@@ -1,6 +1,11 @@
 # SICP Distilled
 ### An idiosyncratic tour of SICP in Clojure
 
+I notice lots of you are coming via Hacker News, I also did a
+[blog post](http://www.thattommyhall.com/2015/09/06/sicp-distilled-now-public/)
+about the status of the project (I should have probably written that
+here but you should read it to see where I am with the project)
+
 ## SICP?
 
 <blockquote><b>Wizard Book n.</b>
