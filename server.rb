@@ -32,7 +32,7 @@ before do
 end
 
 get '/' do
-  redirect '/section/1-distilled'
+  redirect '/section/welcome'
 end
 
 not_found do

@@ -15,8 +15,11 @@
       MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 %body
   .menu
-    %img.menu__header{ src: '/images/sicp2.jpg', alt: "SICP Distilled"}
-    %h1.menu__title SICP Distilled
+    %a{href: '/'}
+      %img.menu__header{ src: '/images/sicp2.jpg', alt: "SICP Distilled"}
+    %h1.menu__title.done
+      %a{href: '/'}
+        SICP Distilled
 
     %ul.menu__list
       %li.done
@@ -27,6 +30,9 @@
         %a{href: '/section/donate'}
           %img{alt:"MSF ", style:"border-width:0", src: "/images/msf.jpg", width: '88px'}
           Donate
+      %li.done
+        %a{href: '/section/welcome'}
+          Welcome
     %h2 Ch1 - Building Abstractions With Functions
     %ul.menu__list
       %li.done
