@@ -466,7 +466,8 @@ Just call `q/save` inside the draw function to save an image
 
 ## Square Limit
 We have all we need to draw Square Limit now, it is just 4 of our
-`corner-split`'s rotated and reflected and arranged in a
+`corner-split`'s rotated and reflected and arranged as below with
+`combine-four`
 
 ```
 (def combine-four (square-of-four flip-horiz
