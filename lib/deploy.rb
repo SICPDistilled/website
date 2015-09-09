@@ -3,8 +3,8 @@ require "mime/types"
 
 class S3Deploy < Middleman::Extension
 
-  REGION = ENV['region']
-  BUCKET = ENV['bucket']
+  REGION = ENV['AWS_REGION']
+  BUCKET = ENV['BUCKET']
 
   def initialize(app, options_hash={}, &block)
     super

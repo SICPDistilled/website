@@ -46,6 +46,7 @@ GEM
     curb-fu (0.6.2)
       curb (>= 0.5.4.0)
       rack-test (>= 0.2.0)
+    dotenv (2.0.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -283,9 +284,13 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  dotenv
   middleman (~> 3.4.0)
   middleman-cdn
   middleman-livereload (~> 3.1.0)
   redcarpet
   tzinfo-data
   wdm (~> 0.1.0)
+
+BUNDLED WITH
+   1.10.6
