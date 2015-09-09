@@ -1,0 +1,99 @@
+$menu-width: 350px;
+$menu-color: $c-primary;
+
+
+.menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: $menu-color;
+  color: white;
+  overflow-y: auto;
+  font-size: medium;
+  z-index: 10;
+
+  @include respond-to(tablet) {
+    display: block;
+    max-width: $menu-width;
+    right: auto;
+  }
+
+  &--active {
+    display: block;
+  }
+}
+
+.menu h2 {
+    font-size: 1.25em;
+    padding: 0;
+}
+
+.menu__list {
+    padding: 0;
+    list-style: none;
+}
+
+.menu__list_2 {
+    padding: 0 0 0 1em;
+    list-style: none;
+    font-size: smaller;
+}
+
+.menu__title {
+    text-align: center;
+}
+.menu__header {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.menu--push {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 50px;
+
+    @include respond-to(tablet) {
+      padding-top: 0;
+      padding-right: 50px;
+      padding-left: $menu-width + 50px;   
+    }
+}
+
+.menu--mobile {
+  position: fixed;
+  left: 0;
+  background-color: $menu-color;
+  right: 0;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  z-index: 15;
+
+  @include respond-to(tablet) {
+    display: none;
+  }
+}
+
+.menu a {
+    color: grey;
+    text-decoration: none;
+    display: block;
+    padding: 5px 15px;
+    pointer-events: none;
+    transition: 1s background-color;
+}
+
+.menu .done a {
+    pointer-events: all;
+    color: inherit;
+}
+.menu .done a:hover {
+    background-color: #b058ba
+}
