@@ -42,4 +42,12 @@ end
 
 ready do
   proxy "/section/welcome", "/index.html"
+  %w[0.1 1.1 1.2 2.1 2.2.4].each do |id|
+    ['', '/'].each do |slash|
+      proxy "/slides/#{id}#{slash}", "/presentation.html", layout: false do
+        @id = id
+        @content = File.read("source/slides/#{id}.md")
+      end
+    end
+  end
 end
