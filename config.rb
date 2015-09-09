@@ -1,3 +1,5 @@
+require "lib/deploy"
+
 activate :directory_indexes
 
 set :markdown_engine, :redcarpet
@@ -22,13 +24,19 @@ set :images_dir, 'images'
 configure :build do
   activate :minify_css
   activate :minify_javascript
+  activate :s3_deploy
+  activate :asset_hash
 
-  # Enable cache buster
-  # activate :asset_hash
-
-  # Use relative URLs
-  # activate :relative_assets
-
+  activate :cdn do |cdn|
+    cdn.cloudflare = {
+      # default ENV['CLOUDFLARE_CLIENT_API_KEY']
+      # default ENV['CLOUDFLARE_EMAIL']
+      zone: 'sicpdistilled.com',
+      base_urls: [
+        'https://www.sicpdistilled.com'
+      ]
+    }
+  end
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 end

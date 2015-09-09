@@ -15,3 +15,7 @@ gem "tzinfo-data", platforms: [:mswin, :mingw, :jruby]
 
 # Markdown
 gem "redcarpet"
+
+# For deploy
+gem "aws-sdk"
+gem "middleman-cdn"
