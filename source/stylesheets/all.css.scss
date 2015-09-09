@@ -1,0 +1,112 @@
+@import "vendor/normalize";
+@import "vendor/github-md";
+
+/* Mine */
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: 'Droid Serif', serif;
+    font-size: large;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    max-width: 350px;
+    padding: 10px;
+    background-color: #592064;
+    color: white;
+    overflow-y: auto;
+    font-size: medium;
+}
+
+.menu h2 {
+    font-size: 1.25em;
+    padding: 0;
+}
+
+.menu__list {
+    padding: 0;
+    list-style: none;
+}
+
+.menu__list_2 {
+    padding: 0 0 0 1em;
+    list-style: none;
+    font-size: smaller;
+}
+
+.menu__title {
+    text-align: center;
+}
+.menu__header {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.menu--push {
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 20%;
+}
+
+.menu a {
+    color: grey;
+    text-decoration: none;
+    display: block;
+    padding: 5px 15px;
+    transition: 1s background-color;
+}
+
+.menu .done a {
+    color: inherit;
+}
+.menu .done a:hover {
+    background-color: #b058ba
+}
+
+.container {
+    position: relative;
+    padding-top: 10px;
+}
+
+.container img { max-width: 800px; }
+
+blockquote {
+    font-family: Georgia, serif;
+    font-style: italic;
+    margin: 0.25em 0;
+    padding: 0.25em 40px;
+    line-height: 1.45;
+    position: relative;
+    color: #383838;
+}
+
+blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 80px;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    color: #7a7a7a;
+}
+
+blockquote cite {
+    color: #999999;
+    /* font-size: 14px; */
+    display: block;
+    margin-top: 5px;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
+}

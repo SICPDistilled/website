@@ -1,3 +1,7 @@
+---
+title: Welcome to SICP Distilled
+---
+
 # SICP Distilled
 ### An idiosyncratic tour of SICP in Clojure
 
