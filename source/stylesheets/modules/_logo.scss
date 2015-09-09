@@ -1,0 +1,8 @@
+.logo {
+  width: 150px;
+  height: auto;
+
+  @include respond-to(tablet) {
+    width: 100%;
+  }
+}

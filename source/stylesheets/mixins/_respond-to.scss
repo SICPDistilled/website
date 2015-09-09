@@ -1,0 +1,39 @@
+// --------------------------
+// ! Respond to device mixins
+// --------------------------
+
+////
+//// @author David Annez
+////
+
+/// Breakpoints
+$tablet-width       : 768px !default;
+$mobile-width       : 480px !default;
+$desktop-width      : 992px !default;
+$large-desktop-width: 1200px !default;
+
+/// Max-breakpoint for mobiles
+
+$mobile-end-width: $tablet-width - 1;
+
+// Devices list
+// 
+$base-devices: (
+  mobile: (breakpoint: $mobile-end-width, constraint: "max-width"), 
+  tablet: (breakpoint: $tablet-width, constraint: "min-width"),
+  desktop: (breakpoint: $desktop-width, constraint: "min-width"),
+  large-desktop: (breakpoint: $large-desktop-width, constraint: "min-width"),
+);
+
+/// Output a media query block for the targeted device
+
+@mixin respond-to($device, $devices: $base-devices){
+  $device: map-get($base-devices, $device);
+  $breakpoint: map-get($device, breakpoint);
+  $constraint: map-get($device, constraint);
+  @if $device {
+    @media screen and (#{$constraint}: #{$breakpoint}){
+      @content
+    }
+  }
+};
