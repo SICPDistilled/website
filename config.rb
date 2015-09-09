@@ -5,6 +5,8 @@ require "lib/deploy"
 
 activate :directory_indexes
 
+set :haml, { ugly: true, format: :html5 }
+
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true,
                layout_engine: :haml,
