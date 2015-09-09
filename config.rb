@@ -37,3 +37,7 @@ configure :build do
     }
   end
 end
+
+ready do
+  proxy "/section/welcome", "/index.html"
+end
