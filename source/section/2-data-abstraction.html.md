@@ -182,7 +182,7 @@ print rational numbers by printing the numerator, a slash, and the
 denominator:
 
 ```clojure
-(define print-rat [x]
+(defn print-rat [x]
   (println (numer x) "/" (denom x)))
 ```
 
