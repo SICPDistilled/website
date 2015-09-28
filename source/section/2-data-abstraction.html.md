@@ -86,7 +86,7 @@ We can express these rules as Clojure functions:
 
 (defn equal-rat? [x y]
   (= (* (numer x) (denom y))
-     (* (numer y) (denom x)))
+     (* (numer y) (denom x))))
 ```
 
 Now we have the operations on rational numbers defined in terms of the
