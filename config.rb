@@ -1,8 +1,6 @@
 require 'dotenv'
 Dotenv.load
 
-require "lib/deploy"
-
 activate :directory_indexes
 
 set :haml, { ugly: true, format: :html5 }
@@ -24,21 +22,41 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
+activate :s3_sync do |s3_sync|
+  s3_sync.bucket                     = 'www.sicpdistilled.com'
+  s3_sync.region                     = 'eu-west-1'
+  s3_sync.delete                     = false
+  s3_sync.after_build                = true
+  s3_sync.prefer_gzip                = true
+  s3_sync.path_style                 = true
+  s3_sync.reduced_redundancy_storage = false
+  s3_sync.acl                        = 'public-read'
+  s3_sync.encryption                 = false
+  s3_sync.prefix                     = ''
+  s3_sync.version_bucket             = false
+end
+
 configure :build do
   activate :minify_css
   activate :minify_javascript
-  activate :s3_deploy
   activate :asset_hash
 
-  activate :cdn do |cdn|
-    cdn.cloudflare = {
-      zone: 'sicpdistilled.com',
-      base_urls: [
-        'https://www.sicpdistilled.com'
-      ]
-    }
-  end
 end
+
+activate :cdn do |cdn|
+  cdn.cloudflare = {
+    email: 'thattommyhall@gmail.com',
+    zone: 'sicpdistilled.com',
+    base_urls: [
+      'http://www.sicpdistilled.com'
+    ]
+  }
+end
+
+after_s3_sync do |files_by_status|
+  cdn_invalidate(files_by_status[:updated])
+end
+
 
 # ready do
 #   # proxy "/section/welcome", "/index.html"

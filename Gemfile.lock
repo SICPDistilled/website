@@ -180,6 +180,7 @@ GEM
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    map (6.5.5)
     maxcdn (0.2.1)
       curb-fu (~> 0.6.2)
       signet (~> 0.5.1)
@@ -220,6 +221,14 @@ GEM
       middleman-core (>= 3.0.2)
       multi_json (~> 1.0)
       rack-livereload
+    middleman-s3_sync (3.0.47)
+      ansi (~> 1.5.0)
+      fog-aws (>= 0.1.1)
+      map
+      middleman-core (>= 3.0.0)
+      pmap
+      ruby-progressbar
+      unf
     middleman-sprockets (3.4.2)
       middleman-core (>= 3.3)
       sprockets (~> 2.12.1)
@@ -242,6 +251,7 @@ GEM
       tilt (~> 1.4.1)
     padrino-support (0.12.5)
       activesupport (>= 3.1)
+    pmap (1.0.2)
     rack (1.6.4)
     rack-livereload (0.3.16)
       rack
@@ -251,6 +261,7 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redcarpet (3.2.2)
+    ruby-progressbar (1.7.5)
     sass (3.4.18)
     signet (0.5.1)
       addressable (>= 2.2.3)
@@ -276,6 +287,9 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -288,6 +302,7 @@ DEPENDENCIES
   middleman (~> 3.4.0)
   middleman-cdn
   middleman-livereload (~> 3.1.0)
+  middleman-s3_sync
   redcarpet
   tzinfo-data
   wdm (~> 0.1.0)

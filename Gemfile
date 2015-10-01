@@ -21,3 +21,4 @@ gem 'dotenv'
 # For deploy
 gem "aws-sdk"
 gem "middleman-cdn"
+gem 'middleman-s3_sync'
